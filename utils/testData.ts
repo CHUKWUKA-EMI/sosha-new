@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import { Comment, Comments, Post, Posts } from "../types/post";
 
+// sample data
 const post: Post = {
   id: "",
   createdAt: dayjs().format(),
