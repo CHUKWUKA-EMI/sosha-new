@@ -90,7 +90,7 @@ export const CreatePostModal: FC<IProps> = ({}) => {
         onClose={closeModal}
       >
         <div
-          className="fixed inset-0 opacity-60 bg-gray-600"
+          className="fixed inset-0 dark:bg-gray-500 opacity-60 bg-gray-600"
           aria-hidden="true"
         />
         <Transition.Child
@@ -102,7 +102,7 @@ export const CreatePostModal: FC<IProps> = ({}) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-black bg-opacity-25" />
+          <div className="fixed inset-0 dark:bg-transparent bg-gray-500 bg-opacity-25" />
         </Transition.Child>
         <VideoUploadModal
           parent="none"
@@ -129,10 +129,10 @@ export const CreatePostModal: FC<IProps> = ({}) => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-[60%] lg:w-[45%] mt-[3.5rem] h-[70%] min-h-[60%] max-h-[70%] min-w-[70%] lg:min-w-[40%] transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-[60%] lg:w-[45%] mt-[3.5rem] h-[70%] min-h-[60%] max-h-[70%] min-w-[70%] lg:min-w-[40%] transform overflow-hidden rounded-2xl dark:bg-[#1d2226] bg-white text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
-                    className="flex items-center px-6 py-2 justify-between sm:grid sm:grid-cols-3 border-b-[1px] border-gray-500 mb-2 text-sky-900"
+                    className="flex items-center px-6 py-2 justify-between sm:grid sm:grid-cols-3 border-b-[1px] border-gray-500 mb-2 dark:text-white text-sky-900"
                   >
                     <span className="text-lg text-center font-bold col-span-2 pl-[50%]">
                       Create Post
@@ -143,7 +143,7 @@ export const CreatePostModal: FC<IProps> = ({}) => {
                         ref={closeButtonRef}
                         type="button"
                         onClick={closeModal}
-                        className="w-fit h-fit p-1 rounded-full bg-gray-200 hover:bg-gray-300"
+                        className="w-fit h-fit p-1 dark:text-white rounded-full dark:bg-inherit dark:hover:bg-gray-500 bg-gray-200 hover:bg-gray-300"
                       >
                         <XIcon className="w-6 h-6" />
                       </button>
@@ -152,11 +152,13 @@ export const CreatePostModal: FC<IProps> = ({}) => {
                   <form className="w-full p-4 relative">
                     <div className="flex items-center gap-2 pb-2">
                       <Avatar className="h-8 w-8" />
-                      <span className="font-semibold">Chukwuka Emi</span>
+                      <span className="font-semibold text-gray-700 text-xl dark:text-white">
+                        Chukwuka Emi
+                      </span>
                     </div>
                     <div className="w-full h-[20rem] pb-4 overflow-y-auto">
                       <TextArea
-                        className="w-full sm:h-auto placeholder:text-gray-500 placeholder:text-xl"
+                        className="w-full sm:h-auto dark:bg-inherit text-xl dark:text-gray-300 dark:placeholder:text-gray-300 placeholder:text-gray-500 placeholder:text-xl"
                         placeholder="What's on your mind?"
                       />
                       {showPreview.show && (imageStr || post.video) && (
@@ -170,8 +172,8 @@ export const CreatePostModal: FC<IProps> = ({}) => {
                         </div>
                       )}
                     </div>
-                    <div className="bg-white h-2 w-full mt-2 mb-20" />
-                    <div className="flex flex-col px-4 mt-4 fixed left-0 right-0 bottom-0 opacity-100 bg-white">
+                    <div className="bg-white dark:bg-[#1d2226] h-2 w-full mt-2 mb-20" />
+                    <div className="flex flex-col px-4 mt-4 fixed left-0 right-0 bottom-0 opacity-100 dark:bg-[#1d2226] bg-white">
                       <div className="flex items-center justify-between">
                         <div className="flex text-sm items-center gap-3 w-full">
                           <input
@@ -187,7 +189,7 @@ export const CreatePostModal: FC<IProps> = ({}) => {
                           <button
                             onClick={handleClick}
                             type="button"
-                            className="text-sky-700 flex items-center gap-1 tooltip-target"
+                            className="text-sky-700 dark:text-white flex items-center gap-1 tooltip-target"
                           >
                             <PhotographIcon className="h-8 w-8" />
                             <span className="tooltiptext">Photo</span>
@@ -196,7 +198,7 @@ export const CreatePostModal: FC<IProps> = ({}) => {
                           <button
                             onClick={() => setOpenVideoModal(true)}
                             type="button"
-                            className="text-sky-700 flex items-center gap-1 tooltip-target"
+                            className="text-sky-700 dark:text-white flex items-center gap-1 tooltip-target"
                           >
                             <VideoIcon />
                             <span className="tooltiptext">Video</span>
@@ -215,7 +217,7 @@ export const CreatePostModal: FC<IProps> = ({}) => {
                         type="submit"
                         disabled
                         fullWidth
-                        className="rounded-md mt-3 mb-3"
+                        className="rounded-md font-semibold mt-3 mb-4"
                       >
                         Post
                       </PrimaryButton>

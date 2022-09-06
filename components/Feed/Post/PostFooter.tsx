@@ -1,26 +1,50 @@
-import {
-  ChatIcon,
-  ChatAltIcon,
-  HeartIcon,
-  ThumbUpIcon,
-} from "@heroicons/react/outline";
-import React, { FC } from "react";
-import { Post } from "../../../types/post";
-import PrimaryButton from "../../Buttons/PrimaryButton";
+import { ChatAltIcon, HeartIcon, ThumbUpIcon } from "@heroicons/react/outline";
+import React, { FC, useState } from "react";
+import { useAppDispatch } from "../../../state/hooks";
+import { setComments } from "../../../state/postsReducers";
+import { Comments, Post } from "../../../types/post";
+import CommentsComponent from "../Comment/Comments";
+import { comment } from "../../../utils/testData";
 
 const PostFooter: FC<Post> = (post) => {
+  const dispatch = useAppDispatch();
+  const [loadComments, setLoadComments] = useState(false);
+
+  const showComments = () => {
+    setLoadComments(!loadComments);
+    if (!post.comments || !post.comments.data.length) {
+      const commentsArr = [1, 2, 3, 4, 5].map((i) => ({
+        ...comment,
+        id: `${i}`,
+        postId: post.id,
+      }));
+      const comments: Comments = {
+        count: 5,
+        data: commentsArr,
+        postId: post.id,
+        start: 0,
+        total: 5,
+      };
+      dispatch(setComments(comments));
+    }
+  };
   return (
     <div className="w-full px-2 block box-border">
       <div className="flex items-center justify-between py-2 border-b border-gray-500 w-full">
         {post.numberOfLikes > 0 && (
-          <a className="w-fit hover:underline flex items-center">
-            <ThumbUpIcon className="w-4 h-4" />{" "}
-            <HeartIcon className="w-4 h-4" />{" "}
-            <span className="w-4 h-4">👏</span> <a>{post.numberOfLikes}</a>
-          </a>
+          <div className="w-fit cursor-pointer hover:underline flex items-center">
+            <ThumbUpIcon className="w-4 h-4 text-sky-600" />{" "}
+            <HeartIcon className="w-4 h-4 text-red-600" />{" "}
+            <span className="font-semibold ml-1 text-gray-700 dark:text-white">
+              {post.numberOfLikes}
+            </span>
+          </div>
         )}
         {post.numberOfComments > 0 && (
-          <a className="w-fit hover:underline">{`${post.numberOfComments} comments`}</a>
+          <a
+            onClick={showComments}
+            className="w-fit cursor-pointer font-semibold ml-1 text-gray-700 dark:text-white hover:underline"
+          >{`${post.numberOfComments} comments`}</a>
         )}
       </div>
       <div className="flex items-center w-full justify-between py-2">
@@ -33,6 +57,7 @@ const PostFooter: FC<Post> = (post) => {
         </div>
 
         <div
+          onClick={showComments}
           role="button"
           className="flex items-center justify-center w-[30%]  active:scale-75 text-sm font-semibold outline-none dark:hover:bg-gray-600 dark:text-white hover:bg-gray-200 p-2 rounded-md text-gray-600 gap-1"
         >
@@ -62,6 +87,13 @@ const PostFooter: FC<Post> = (post) => {
           <span>Share</span>
         </div>
       </div>
+      {loadComments ? (
+        <div className="w-full">
+          <CommentsComponent {...post} />
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

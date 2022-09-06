@@ -4,10 +4,12 @@ import PhotographIcon from "@heroicons/react/solid/PhotographIcon";
 import VideoIcon from "../VideoIcon";
 import { CreatePostModal } from "./CreatePostModal";
 import { useAppDispatch } from "../../state/hooks";
-import { setOpenPostModal } from "../../state/postsReducers";
+import { setOpenPostModal, setPosts } from "../../state/postsReducers";
 import VideoUploadModal from "./VideoUploadModal";
 import UserInfo from "./UserInfo";
 import Posts from "./Posts";
+import { useEffectOnce } from "../UseEffectOnce";
+import { postsData } from "../../utils/testData";
 
 const Feed: FC = () => {
   const dispatch = useAppDispatch();
@@ -15,6 +17,10 @@ const Feed: FC = () => {
   const [videoUrl, setVideoUrl] = useState<string>("");
   const [canPreviewVideo, setCanPreviewVideo] = useState(false);
   const [error, setError] = useState("");
+
+  useEffectOnce(() => {
+    dispatch(setPosts(postsData));
+  });
 
   function openPostModal() {
     dispatch(setOpenPostModal("desktop"));
@@ -52,7 +58,7 @@ const Feed: FC = () => {
             <Avatar className="h-12 w-12" />
             <button
               onClick={openPostModal}
-              className="w-full text-left dark:text-white dark:border dark:border-gray-400 dark:hover:bg-gray-400 hover:bg-gray-200 dark:bg-inherit bg-gray-100 pl-3 rounded-full h-12"
+              className="w-full text-left dark:text-white dark:border dark:border-gray-400 dark:hover:bg-gray-600 hover:bg-gray-200 dark:bg-inherit bg-gray-100 pl-3 rounded-full h-12"
             >
               What&apos;s on your mind?
             </button>

@@ -1,7 +1,7 @@
 import { Transition, Dialog } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
-import React, { FC, Fragment, useState } from "react";
-import { toast } from "react-toastify";
+import React, { FC, Fragment } from "react";
+
 import { validateVideoUrl } from "../../utils/validateVideoUrl";
 import PrimaryButton from "../Buttons/PrimaryButton";
 import SecondaryButton from "../Buttons/SecondaryButton";
@@ -116,7 +116,7 @@ const VideoUploadModal: FC<IProps> = ({
                       </span>
                     )}
                     <TextField
-                      onchange={handleChange}
+                      onChange={handleChange}
                       type="url"
                       fullWidth
                       placeholder="Enter a youtube video url"

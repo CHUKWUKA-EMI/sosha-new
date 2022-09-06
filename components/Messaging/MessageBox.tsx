@@ -4,7 +4,7 @@ import {
   MailOpenIcon,
   ArrowLeftIcon,
 } from "@heroicons/react/outline";
-import React from "react";
+import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import Avatar from "../Avatar";
 import PrimaryButton from "../Buttons/PrimaryButton";
@@ -15,6 +15,7 @@ import { selectThread } from "../../state/chatsReducers";
 const MessageBox = () => {
   const dispatch = useAppDispatch();
   const selectedThread = useAppSelector((state) => state.chats.selectedThread);
+  const [openEmoji, setOpenEmoji] = useState(false);
 
   const backToThreads = () => {
     dispatch(selectThread(null));
@@ -25,14 +26,14 @@ const MessageBox = () => {
       <div
         className={`h-14 p-4 flex items-center ${
           selectedThread ? "justify-between" : "justify-start sm:justify-end"
-        } text-sky-700 dark:text-white font-bold border-b border-gray-400 dark:border-white`}
+        } text-sky-700 dark:text-white font-bold border-b border-gray-400 dark:border-gray-500`}
       >
         <div className={`${!selectedThread ? "hidden" : ""}`}>
           <div className={`flex items-center gap-2`}>
             <Avatar className="hidden sm:block w-6 h-6" />
             <button
               onClick={backToThreads}
-              className="sm:hidden mr-3 h-fit w-fit rounded-full p-1 bg-gray-200 hover:bg-gray-300"
+              className="sm:hidden mr-3 h-fit w-fit rounded-full p-1 dark:text-white dark:bg-inherit bg-gray-200 hover:bg-gray-300"
             >
               <ArrowLeftIcon className="w-8 h-8" />
             </button>
@@ -56,17 +57,17 @@ const MessageBox = () => {
       </div>
       <div className="h-[70%]"></div>
       <div
-        className={`w-full bg-gray-100 ${
+        className={`w-full bg-gray-100 dark:bg-[#1d2226] ${
           !selectedThread ? "hidden" : ""
         } absolute bottom-0 overflow-y-hidden p-2`}
       >
         <TextArea
           parent="messageBox"
-          className="rounded-lg border border-gray-400 w-full py-3 px-4"
+          className="rounded-lg dark:bg-inherit dark:text-white border border-gray-400 w-full py-3 px-4"
           placeholder="Write a message..."
         />
         <div className="flex items-center justify-between px-1">
-          <div className="flex items-center justify-around">
+          <div className="flex items-center justify-around gap-2">
             <input
               id="image-input"
               accept="image/*"
@@ -75,16 +76,22 @@ const MessageBox = () => {
               type="file"
             />
             <label htmlFor="image-input">
-              <span className="text-sky-700 cursor-pointer">
+              <span className="text-sky-700 dark:text-white cursor-pointer">
                 <PhotographIcon className="h-8 w-8" />
               </span>
             </label>
-            <div className="hidden sm:block z-20">
-              <Emojis />
+            <div className="hidden pt-2 sm:block z-20">
+              <Emojis
+                top={0}
+                isPopoverOpen={openEmoji}
+                setIsPopoverOpen={setOpenEmoji}
+              />
             </div>
           </div>
 
-          <PrimaryButton className="rounded-full">Send</PrimaryButton>
+          <PrimaryButton disabled className="rounded-full">
+            Send
+          </PrimaryButton>
         </div>
       </div>
     </div>

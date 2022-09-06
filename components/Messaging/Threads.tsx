@@ -7,12 +7,13 @@ const Threads = () => {
   const threads = useAppSelector((state) => state.chats.threads);
   return (
     <div className="w-full h-full">
-      <div className="h-14 p-4 text-sky-700 dark:text-white font-bold border-b border-gray-400 dark:border-white">
+      <div className="h-14 p-4 text-sky-700 dark:text-white font-bold border-b border-gray-400 dark:border-gray-500">
         Messaging
       </div>
-      <div className="p-2 border-b flex justify-center border-gray-400 dark:border-white">
+      <div className="p-2 border-b flex justify-center border-gray-400 dark:border-gray-500">
         <SearchInput
-          className="w-full placeholder:text-gray-500"
+          containerStyle="dark:border dark:shadow-sm dark:border-gray-500 rounded-lg"
+          className="w-full dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-300"
           placeholder="Search messages"
         />
       </div>

@@ -73,7 +73,7 @@ const Emojis: FC<IProps> = ({
       onClickOutside={() => setIsPopoverOpen(false)}
       content={() => (
         <div className="flex flex-col w-[20rem] relative basis-auto overflow-x-hidden items-center justify-between h-[25rem] bg-white rounded-lg border border-gray-700 text-black">
-          <div className="w-full mb-9 absolute top-0 left-0 right-1 opacity-100 z-40 bg-white">
+          <div className="w-full mb-9 absolute top-0 left-0 right-1 opacity-100 z-40 bg-white dark:bg-[#1d2226]">
             <div className="w-[90%] mx-auto py-2">
               <SearchInput
                 fullWidth
@@ -81,8 +81,8 @@ const Emojis: FC<IProps> = ({
                 setValue={setSearchTerm}
                 onInput={handleSearch}
                 placeholder="Search emojis"
-                containerStyle="rounded-full border border-gray-600 mx-auto"
-                className="rounded-full placeholder:text-gray-600"
+                containerStyle="rounded-full dark:shadow-sm border dark:border-gray-400 border-gray-600 mx-auto"
+                className="rounded-full dark:placeholder:text-gray-300 dark:text-white placeholder:text-gray-600"
               />
             </div>
             <div className="flex items-center pt-1 justify-between w-full border-b border-gray-600">
@@ -92,7 +92,7 @@ const Emojis: FC<IProps> = ({
                   onClick={() => setSelectedEmojiCategory(header.name)}
                   type="button"
                   key={i}
-                  className={`w-fit relative hover:bg-gray-200 h-fit p-3 `}
+                  className={`w-fit relative hover:bg-gray-200 dark:hover:bg-gray-600 h-fit p-3 `}
                 >
                   <span className={`font-bold`}>{header.emoji}</span>
                   <div
@@ -103,12 +103,12 @@ const Emojis: FC<IProps> = ({
                 </button>
               ))}
             </div>
-            <div className="w-full py-4 px-3 font-medium text-lg text-gray-500 tracking-wider  opacity-100 bg-white">
+            <div className="w-full py-4 px-3 font-medium text-lg text-gray-500 dark:text-gray-300 tracking-wider  opacity-100 bg-white dark:bg-[#1d2226]">
               {selectedEmojiCategory}
             </div>
           </div>
 
-          <div className="w-full h-full z-30 overflow-y-scroll overflow-x-hidden pt-4 mx-auto">
+          <div className="w-full h-full z-30 dark:bg-[#1d2226] overflow-y-scroll overflow-x-hidden pt-4 mx-auto">
             <div className="w-full h-full flex items-center mt-4 mx-auto flex-wrap justify-between px-3 gap-2">
               {emojis
                 .find((emoji) => emoji.categoryName === selectedEmojiCategory)
@@ -128,16 +128,16 @@ const Emojis: FC<IProps> = ({
                       })
                     }
                     type="button"
-                    className=""
+                    className="transform transition-all delay-100 duration-100 ease-in-out hover:scale-150"
                   >
                     <span className="text-2xl">{data.emoji}</span>
                   </button>
                 ))}
             </div>
           </div>
-          <div className="w-full flex items-center justify-start gap-6 h-fit p-3 border-t border-gray-600">
+          <div className="w-full flex dark:bg-[#1d2226] dark:text-gray-300 items-center justify-start gap-6 h-fit p-3 border-t border-gray-600">
             <span className="text-2xl">{pointedEmoji.emoji}</span>
-            <div className="font-light text-sm text-gray-600">
+            <div className="font-light text-sm text-gray-600 dark:text-gray-300">
               {pointedEmoji.description.length >= 20
                 ? `${pointedEmoji.description.slice(0, 21)}...`
                 : pointedEmoji.description}
@@ -146,7 +146,11 @@ const Emojis: FC<IProps> = ({
         </div>
       )}
     >
-      <button type="button" onClick={() => setIsPopoverOpen(!isPopoverOpen)}>
+      <button
+        className="text-gray-500 dark:text-white"
+        type="button"
+        onClick={() => setIsPopoverOpen(!isPopoverOpen)}
+      >
         <EmojiHappyIcon ref={clickButtonRef} className="w-8 h-8" />
       </button>
     </Popover>

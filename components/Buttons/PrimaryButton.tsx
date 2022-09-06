@@ -37,7 +37,7 @@ const PrimaryButton: FC<IProps> = ({
       )}
     >
       {startIcon ? (
-        <span className="flex w-full items-center gap-3">
+        <span className="flex w-full justify-center items-center gap-3">
           <span>{startIcon}</span>
           <span>{label}</span>
         </span>

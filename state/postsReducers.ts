@@ -60,6 +60,8 @@ export const postSlice = createSlice({
       state.posts.data = state.posts.data.filter(
         (post) => post.id !== payload.id
       );
+      state.posts.count--;
+      state.posts.total--;
     },
     setComments: (
       state: InitialState,
@@ -121,6 +123,8 @@ export const postSlice = createSlice({
         post.comments.data = post.comments.data.filter(
           (c) => c.id !== payload.id
         );
+        post.comments.count--;
+        post.comments.total--;
         post.numberOfComments--;
       }
     },
@@ -190,6 +194,8 @@ export const postSlice = createSlice({
           comment.replies.data = comment.replies.data.filter(
             (r) => r.id !== payload.id
           );
+          comment.replies.count--;
+          comment.replies.total--;
           comment.numberOfReplies--;
         }
       }

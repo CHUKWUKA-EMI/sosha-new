@@ -8,14 +8,23 @@ import {
 } from "@heroicons/react/outline";
 import { PencilAltIcon } from "@heroicons/react/solid";
 import React, { FC, Fragment } from "react";
-import { Post } from "../../../types/post";
+import { useAppDispatch, useAppSelector } from "../../../state/hooks";
+import { deletePost } from "../../../state/postsReducers";
 
 interface IProps {
-  deletePost?: (id: string) => void;
-  embedPost?: () => void;
+  postId: string;
 }
 
-const PostOptionsDropDown: FC<Post & IProps> = (props) => {
+const PostOptionsDropDown: FC<IProps> = ({ postId }) => {
+  const dispatch = useAppDispatch();
+  const posts = useAppSelector((state) => state.posts.posts);
+
+  const handleDelete = () => {
+    const post = posts.data.find((p) => p.id === postId);
+    if (!post) return;
+    dispatch(deletePost(post));
+  };
+
   return (
     <Menu as="div" className="ml-3 relative hidden xs:block">
       <div>
@@ -42,7 +51,7 @@ const PostOptionsDropDown: FC<Post & IProps> = (props) => {
             <span className="w-fit">Copy link to Post</span>
           </Menu.Item>
           <Menu.Item
-            onClick={props.embedPost}
+            // onClick={}
             className="w-full flex items-center dark:text-gray-300 dark:hover:text-white text-gray-600 font-medium gap-4 p-4 dark:hover:bg-inherit hover:bg-gray-200"
             as="button"
           >
@@ -64,7 +73,7 @@ const PostOptionsDropDown: FC<Post & IProps> = (props) => {
             <span className="w-fit">Edit post</span>
           </Menu.Item>
           <Menu.Item
-            onClick={() => props.deletePost?.(props.id)}
+            onClick={handleDelete}
             className="w-full flex items-center dark:text-gray-300 dark:hover:text-white text-gray-600 font-medium gap-4 p-4 dark:hover:bg-inherit hover:bg-gray-200"
             as="button"
           >

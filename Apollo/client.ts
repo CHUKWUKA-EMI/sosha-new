@@ -1,7 +1,13 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import { useMemo } from "react";
-import { ApolloClient, InMemoryCache, split, HttpLink } from "@apollo/client";
+import {
+  ApolloClient,
+  InMemoryCache,
+  split,
+  HttpLink,
+  NormalizedCacheObject,
+} from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { getMainDefinition } from "@apollo/client/utilities";
 import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
@@ -65,7 +71,7 @@ const splitLink = process.browser
     )
   : httpLink;
 
-let apolloClient: any;
+let apolloClient: ApolloClient<NormalizedCacheObject>;
 
 function createApolloClient() {
   return new ApolloClient({

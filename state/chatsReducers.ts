@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IChat, IChats, IUserIsTyping, Thread, Threads } from "../types/chats";
-import { IUser } from "../types/user";
+import { FriendShip, IUser } from "../types/user";
 
 interface InitialState {
   chats: IChats;
   threads: Threads;
   selectedThread: Thread | null;
+  selectedFriendships: FriendShip[];
   userTyping: IUserIsTyping | null;
 }
 
@@ -26,6 +27,7 @@ export const chatSlice = createSlice({
       total: 0,
     },
     selectedThread: null,
+    selectedFriendships: [],
     userTyping: null,
   },
   reducers: {
@@ -46,6 +48,24 @@ export const chatSlice = createSlice({
       action: PayloadAction<Thread | null>
     ) => {
       state.selectedThread = action.payload;
+    },
+    selectConnectionToChatWith: (
+      state: InitialState,
+      action: PayloadAction<FriendShip>
+    ) => {
+      const exists = state.selectedFriendships.find(
+        (fr) => fr.friendshipId === action.payload.friendshipId
+      );
+      if (exists) return;
+      state.selectedFriendships.push(action.payload);
+    },
+    removeConnectionToChatWith: (
+      state: InitialState,
+      action: PayloadAction<FriendShip>
+    ) => {
+      state.selectedFriendships = state.selectedFriendships.filter(
+        (f) => f.friendshipId !== action.payload.friendshipId
+      );
     },
     updateChat: (state: InitialState, action: PayloadAction<IChat>) => {
       const chatIndex = state.chats.data.findIndex(
@@ -111,6 +131,8 @@ export const {
   addThread,
   deleteThread,
   setThreads,
+  selectConnectionToChatWith,
+  removeConnectionToChatWith,
   updateThread,
   handleUserTyping,
 } = chatSlice.actions;

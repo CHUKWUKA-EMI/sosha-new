@@ -54,10 +54,10 @@ export default function MainNavbar() {
   };
 
   return (
-    <nav className="dark:bg-[#1d2226] fixed z-30 top-0 left-0 right-0 bg-white px-4">
+    <nav className="dark:bg-[#1d2226] fixed z-50 top-0 left-0 right-0 bg-white px-4">
       <div className="max-w-7xl mx-auto px-0 sm:px-6 lg:px-8">
         <div className="relative flex items-center  justify-around sm:justify-between h-16">
-          <div className="w-fit max-w-fit flex flex-auto items-center justify-center sm:items-stretch sm:justify-start">
+          <div className="w-fit max-w-fit flex flex-auto items-stretch justify-center sm:items-stretch sm:justify-start">
             <Link className="sm:hidden" href="/profile">
               <a className="sm:hidden dark:bg-white bg-sky-800 w-fit flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                 <img
@@ -94,8 +94,12 @@ export default function MainNavbar() {
                   >
                     <a
                       className={classNames(
-                        "flex items-center flex-col dark:text-gray-400 text-sky-800 dark:hover:bg-inherit hover:bg-sky-700 dark:hover:text-white hover:text-white",
-                        "px-3 py-2 rounded-md text-sm font-medium"
+                        `flex items-center flex-col ${
+                          router.pathname === item.href
+                            ? "text-sky-500 border-sky-500 border-b-2 dark:text-white dark:border-white"
+                            : "text-sky-800 dark:text-gray-400"
+                        } dark:hover:bg-inherit dark:hover:text-white hover:text-sky-500`,
+                        `px-3 py-2 text-sm font-medium`
                       )}
                       aria-current={
                         router.pathname === item.href ? "page" : undefined
@@ -112,8 +116,9 @@ export default function MainNavbar() {
           <div className="flex flex-1 items-center w-full max-w-[70%] sm:max-w-[30%] ml-3 sm:ml-0 mr-3">
             <SearchInput
               fullWidth
-              containerStyle="rounded-full"
-              className="rounded-full"
+              placeholder="Search"
+              containerStyle="rounded-full dark:bg-inherit dark:shadow-sm dark:border dark:border-gray-300"
+              className="rounded-full dark:text-gray-300 dark:bg-inherit placeholder:text-gray-600 dark:placeholder:text-gray-300"
             />
           </div>
           <div className="absolute inset-y-0 min-w-fit flex items-center -right-[8px] sm:right-0 sm:static sm:inset-auto sm:ml-6 sm:pr-0">

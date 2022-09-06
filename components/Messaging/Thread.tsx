@@ -17,14 +17,14 @@ const Thread: FC<IProps> = ({ thread }) => {
   return (
     <div
       onClick={select}
-      className="flex flex-col justify-center cursor-pointer w-full p-4 border-b border-gray-300 hover:bg-gray-200"
+      className="flex flex-col justify-center cursor-pointer w-full p-4 border-b border-gray-300 dark:border-gray-500 dark:hover:bg-gray-700 hover:bg-gray-200"
     >
       <div className="flex items-center gap-2">
         <Avatar className="w-8 h-8" imageUrl={thread.friend.imgUrl} />
-        <span className="font-semibold">{`${thread.friend.firstName} ${thread.friend.lastName}`}</span>
+        <span className="font-semibold dark:text-white">{`${thread.friend.firstName} ${thread.friend.lastName}`}</span>
       </div>
       <span
-        className={`w-full text-sm pt-2 text-ellipsis ${
+        className={`w-full text-sm pt-2 dark:text-gray-300 text-ellipsis ${
           thread.lastMessage.read
             ? "font-medium text-gray-500"
             : "font-semibold text-gray-600"

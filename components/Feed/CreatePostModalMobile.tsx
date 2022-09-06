@@ -73,11 +73,11 @@ export const CreatePostModalMobile: FC<IProps> = ({}) => {
       <Dialog
         as="div"
         initialFocus={closeButtonRef}
-        className="relative z-[1] w-[90%] sm:hidden"
+        className="relative z-50 w-[90%] sm:hidden"
         onClose={closeModal}
       >
         <div
-          className="fixed inset-0 opacity-60 bg-gray-600"
+          className="fixed inset-0 opacity-60 rounded-tl-2xl rounded-tr-2xl dark:bg-gray-900 bg-gray-600"
           aria-hidden="true"
         />
         <Transition.Child
@@ -89,7 +89,7 @@ export const CreatePostModalMobile: FC<IProps> = ({}) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-black bg-opacity-25" />
+          <div className="fixed inset-0 dark:bg-transparent bg-black bg-opacity-25" />
         </Transition.Child>
 
         <VideoUploadModal
@@ -116,10 +116,10 @@ export const CreatePostModalMobile: FC<IProps> = ({}) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-screen h-screen min-w-full transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="w-screen h-screen min-w-full transform overflow-hidden rounded-2xl dark:bg-[#1d2226] bg-white text-left align-middle shadow-xl transition-all">
                 <Dialog.Title
                   as="h3"
-                  className="flex items-center px-6 py-2 justify-between border-b-[1px] border-gray-500 mb-2 text-sky-900"
+                  className="flex items-center px-6 py-2 justify-between border-b-[1px] border-gray-500 mb-2 dark:text-white text-sky-900"
                 >
                   <button ref={closeButtonRef} onClick={closeModal}>
                     <XIcon className="w-6 h-6" />
@@ -134,11 +134,13 @@ export const CreatePostModalMobile: FC<IProps> = ({}) => {
                 <form className="w-full p-4">
                   <div className="flex items-center gap-2 pb-2">
                     <Avatar className="h-8 w-8" />
-                    <span className="font-semibold">Chukwuka Emi</span>
+                    <span className="font-semibold text-lg dark:text-white">
+                      Chukwuka Emi
+                    </span>
                   </div>
-                  <div className="w-full h-[20rem] pb-4 overflow-y-auto">
+                  <div className="w-full h-[25rem] pb-4 overflow-y-auto">
                     <TextArea
-                      className="w-full placeholder:text-gray-500 placeholder:text-lg"
+                      className="w-full dark:bg-inherit dark:text-white dark:placeholder:text-gray-400 placeholder:text-gray-500 placeholder:text-lg"
                       placeholder="What's on your mind?"
                     />
                     {showPreview.show && (imageStr || post.video) && (
@@ -152,8 +154,8 @@ export const CreatePostModalMobile: FC<IProps> = ({}) => {
                       </div>
                     )}
                   </div>
-                  {/* <span className="bg-white h-1 w-full" /> */}
-                  <div className="fixed left-0 right-0 bottom-0 pb-20 opacity-100 bg-white">
+
+                  <div className="fixed left-0 right-0 bottom-0 pb-20 opacity-100 dark:bg-[#1d2226] px-1 bg-white">
                     <div className="flex flex-col text-sm gap-3 w-full">
                       <input
                         ref={inputRef}
@@ -168,11 +170,11 @@ export const CreatePostModalMobile: FC<IProps> = ({}) => {
                       <button
                         onClick={handleClick}
                         type="button"
-                        className="text-sky-700 cursor-pointer w-fit flex items-center gap-1 tooltip-target"
+                        className="text-sky-700 dark:text-white cursor-pointer w-fit flex items-center gap-1"
                       >
                         <PhotographIcon className="h-8 w-8" />
-                        <span className="tooltiptext">Photo</span>
-                        <span className="text-sky-700 font-bold">
+
+                        <span className="text-sky-700 dark:text-white font-bold">
                           Add a photo
                         </span>
                       </button>
@@ -180,11 +182,11 @@ export const CreatePostModalMobile: FC<IProps> = ({}) => {
                       <button
                         type="button"
                         onClick={() => setOpenVideoModal(true)}
-                        className="text-sky-700 w-fit flex items-center gap-1 tooltip-target"
+                        className="text-sky-700 dark:text-white w-fit flex items-center gap-1"
                       >
                         <VideoIcon />
-                        <span className="tooltiptext">Video</span>
-                        <span className="text-sky-700 font-bold">
+
+                        <span className="text-sky-700 dark:text-white font-bold">
                           Add a video
                         </span>
                       </button>

@@ -95,7 +95,7 @@ export type FriendShip = {
   followerId: string;
   friendId: string;
   friendshipStatus: FriendshipStatus;
-  friend?: TFriend;
+  friend?: Partial<TFriend>;
   blockedBy?: string;
   createdAt?: DateTime;
   updatedAt?: DateTime;

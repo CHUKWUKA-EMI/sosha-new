@@ -30,13 +30,13 @@ const BottomNavigation = () => {
   };
 
   return (
-    <div className="w-full shadow-sm shadow-gray-700 bottom-0 z-20 fixed py-2 px-0 text-xs flex items-center justify-around sm:hidden bg-white">
+    <div className="w-full shadow-sm shadow-gray-700 bottom-0 z-[55] fixed px-0 text-xs flex items-stretch justify-between sm:hidden dark:border-t dark:border-gray-500 bg-white dark:bg-[#1d2226]">
       {navigation.map((item) => {
         return item.name === "Post" ? (
           <button
             onClick={openPostModal}
             key={item.name}
-            className="flex flex-col items-center font-normal text-sky-800"
+            className="flex flex-col py-3 items-center font-normal text-sky-800 dark:text-gray-400"
           >
             {item.icon}
             {item.name}
@@ -48,7 +48,11 @@ const BottomNavigation = () => {
             aria-current={router.pathname === item.href ? "page" : undefined}
           >
             <a
-              className="flex items-center flex-col text-sky-800 font-normal"
+              className={`flex items-center py-3 px-3 flex-col ${
+                router.pathname === item.href
+                  ? "text-sky-600 border-t-2 dark:text-white"
+                  : "text-sky-800 dark:text-gray-400"
+              } font-normal`}
               aria-current={router.pathname === item.href ? "page" : undefined}
             >
               {item.icon}

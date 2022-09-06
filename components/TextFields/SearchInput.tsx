@@ -25,18 +25,18 @@ const SearchInput: FC<IProps> = ({
 }) => {
   return (
     <div
-      className={`bg-gray-100 ${containerStyle} flex flex-1 items-center px-2 shadow-sm ${
+      className={`bg-gray-100 dark:bg-inherit ${containerStyle} flex flex-1 items-center px-2 shadow-sm ${
         fullWidth ? "w-full" : "w-fit"
       } shadow-gray-400`}
     >
-      <SearchIcon className="h-6 w-6 text-sky-800" />
+      <SearchIcon className="h-6 w-6 dark:text-gray-300 text-sky-800" />
       <InputBase
         fullWidth={fullWidth}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
         onInput={onInput}
-        className={`outline-none z-0 bg-gray-100 ${className}  py-3 px-3`}
+        className={`outline-none dark:bg-inherit z-0 bg-gray-100 ${className}  py-3 px-3`}
       />
       <button onClick={() => setValue?.("")} className={`w-fit h-fit`}>
         <svg

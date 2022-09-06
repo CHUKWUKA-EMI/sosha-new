@@ -6,8 +6,8 @@ import Threads from "./Threads";
 const MessagingRoot: FC = () => {
   const selectedThread = useAppSelector((state) => state.chats.selectedThread);
   return (
-    <div className="w-full px-2 pt-2 sm:pt-4">
-      <div className="w-full bg-white h-[90vh] sm:h-[87.5vh] overflow-y-hidden shadow-md shadow-gray-600 rounded-md sm:w-[70%] mx-auto">
+    <div className="w-full xs:px-2 pt-2 sm:pt-4">
+      <div className="w-full bg-white dark:bg-[#1d2226] h-[90vh] sm:h-[87.5vh] overflow-y-hidden shadow-md shadow-gray-600 rounded-md sm:w-[70%] mx-auto">
         {/* Message Box mobile view */}
         {selectedThread && (
           <div className="sm:hidden h-[80vh] w-full overflow-y-hidden items-center">

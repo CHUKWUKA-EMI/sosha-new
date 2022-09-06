@@ -67,7 +67,7 @@ const TextArea: FC<IProps> = ({ className, placeholder, parent }) => {
       className={classNames(
         `${className} ${
           parent === "messageBox" ? "max-h-[85px]" : ""
-        } outline-none box-border resize-none p-1 mt-3 bg-white`
+        } outline-none box-border min-h-[3rem] resize-none py-1 px-2 mt-3 bg-white`
       )}
     />
   );

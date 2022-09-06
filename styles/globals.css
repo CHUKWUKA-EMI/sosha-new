@@ -34,8 +34,16 @@
   visibility: visible;
 }
 
+.tooltip-container {
+  @apply !p-0 !rounded-md !overflow-hidden;
+}
+
+.tooltip-arrow {
+  @apply dark:hidden;
+}
+
 .btn-primary {
-  @apply bg-sky-600 hover:bg-sky-800 disabled:bg-gray-300 text-white py-2 px-4;
+  @apply bg-sky-600 hover:bg-sky-800 dark:disabled:bg-gray-500 dark:disabled:text-gray-200 disabled:bg-gray-300 text-white py-2 px-4;
 }
 
 .btn-secondary {
