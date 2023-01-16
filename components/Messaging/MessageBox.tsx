@@ -1,21 +1,17 @@
-import { PhotographIcon } from "@heroicons/react/solid";
 import {
   MailIcon,
   MailOpenIcon,
   ArrowLeftIcon,
 } from "@heroicons/react/outline";
-import React, { useState } from "react";
+import React from "react";
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import Avatar from "../Avatar";
-import PrimaryButton from "../Buttons/PrimaryButton";
-import Emojis from "../Emojis";
-import TextArea from "../TextFields/TextArea";
 import { selectThread } from "../../state/chatsReducers";
+import MessageInputArea from "./MessageInputArea";
 
 const MessageBox = () => {
   const dispatch = useAppDispatch();
   const selectedThread = useAppSelector((state) => state.chats.selectedThread);
-  const [openEmoji, setOpenEmoji] = useState(false);
 
   const backToThreads = () => {
     dispatch(selectThread(null));
@@ -56,44 +52,7 @@ const MessageBox = () => {
         </div>
       </div>
       <div className="h-[70%]"></div>
-      <div
-        className={`w-full bg-gray-100 dark:bg-[#1d2226] ${
-          !selectedThread ? "hidden" : ""
-        } absolute bottom-0 overflow-y-hidden p-2`}
-      >
-        <TextArea
-          parent="messageBox"
-          className="rounded-lg dark:bg-inherit dark:text-white border border-gray-400 w-full py-3 px-4"
-          placeholder="Write a message..."
-        />
-        <div className="flex items-center justify-between px-1">
-          <div className="flex items-center justify-around gap-2">
-            <input
-              id="image-input"
-              accept="image/*"
-              name="image"
-              className="hidden"
-              type="file"
-            />
-            <label htmlFor="image-input">
-              <span className="text-sky-700 dark:text-white cursor-pointer">
-                <PhotographIcon className="h-8 w-8" />
-              </span>
-            </label>
-            <div className="hidden pt-2 sm:block z-20">
-              <Emojis
-                top={0}
-                isPopoverOpen={openEmoji}
-                setIsPopoverOpen={setOpenEmoji}
-              />
-            </div>
-          </div>
-
-          <PrimaryButton disabled className="rounded-full">
-            Send
-          </PrimaryButton>
-        </div>
-      </div>
+      <MessageInputArea parent="messageBox" selectedThread={selectedThread} />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IChat, IChats, IUserIsTyping, Thread, Threads } from "../types/chats";
-import { FriendShip, IUser } from "../types/user";
+import { FriendShip } from "../types/user";
+import _ from "lodash";
 
 interface InitialState {
   chats: IChats;
@@ -61,10 +62,10 @@ export const chatSlice = createSlice({
     },
     removeConnectionToChatWith: (
       state: InitialState,
-      action: PayloadAction<FriendShip>
+      action: PayloadAction<{ friendshipId: string }>
     ) => {
       state.selectedFriendships = state.selectedFriendships.filter(
-        (f) => f.friendshipId !== action.payload.friendshipId
+        (fr) => fr.friendshipId !== action.payload.friendshipId
       );
     },
     updateChat: (state: InitialState, action: PayloadAction<IChat>) => {

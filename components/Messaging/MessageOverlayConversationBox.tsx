@@ -4,16 +4,23 @@ import { removeConnectionToChatWith } from "../../state/chatsReducers";
 import { useAppDispatch } from "../../state/hooks";
 import { FriendShip } from "../../types/user";
 import Avatar from "../Avatar";
+import MessageInputArea from "./MessageInputArea";
 
 const MessageOverlayConversationBox: FC<FriendShip> = (friendship) => {
   const dispatch = useAppDispatch();
 
   const closeConversation = () => {
-    dispatch(removeConnectionToChatWith(friendship));
+    console.log("friendship", friendship.friendshipId);
+    dispatch(
+      removeConnectionToChatWith({ friendshipId: friendship.friendshipId })
+    );
   };
 
   return friendship.friend ? (
-    <div className="h-[85vh] sm:h-auto w-screen shadow-sm shadow-gray-600 sm:w-72 border border-gray-500 bg-white dark:bg-[#1d2226] rounded-tl-lg rounded-tr-lg">
+    <div
+      onMouseEnter={() => console.log("friendship", friendship.friendshipId)}
+      className="h-[85vh] sm:h-auto w-screen shadow-sm shadow-gray-600 sm:w-72 border border-gray-500 bg-white dark:bg-[#1d2226] rounded-tl-lg rounded-tr-lg"
+    >
       <div className="w-full flex items-center border-b border-gray-500 justify-between p-3">
         <span className="font-semibold w-full text-gray-700 dark:text-white">
           New message
@@ -46,6 +53,8 @@ const MessageOverlayConversationBox: FC<FriendShip> = (friendship) => {
             )}
           </div>
         </div>
+        <div className="w-full p-4">Chats</div>
+        <MessageInputArea parent="messageOverlay" />
       </div>
     </div>
   ) : null;
